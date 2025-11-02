@@ -4,13 +4,13 @@
 
 // 1) Data dell'evento (per countdown e label):
 // Formato ISO: "YYYY-MM-DDTHH:mm:ss±TZ" (es. 2026-06-21T16:00:00+02:00)
-const WEDDING_DATE = "2026-06-21T16:00:00+02:00";  // <-- CAMBIA QUI
-const DATE_LABEL_TEXT = "21 giugno 2026 — ore 16:00";
+const WEDDING_DATE = "2026-05-30T11:00:00+02:00";
+const DATE_LABEL_TEXT = "30 maggio 2026 — ore 11:00";
 
 // 2) Cloudinary (per Upload):
 // Crea un account Cloudinary, imposta un "Upload preset" UNSIGNED e inserisci i valori:
-const CLOUDINARY_CLOUD_NAME = "INSERISCI_CLOUD_NAME";   // es. "mio-cloud"
-const CLOUDINARY_UPLOAD_PRESET = "INSERISCI_UPLOAD_PRESET"; // es. "wedding_unsigned"
+const CLOUDINARY_CLOUD_NAME = "dzshcjrcy";   // es. "mio-cloud"
+const CLOUDINARY_UPLOAD_PRESET = "wedding_unsigned"; // es. "wedding_unsigned"
 
 // Opzioni di upload
 const MAX_FILE_MB = 15;

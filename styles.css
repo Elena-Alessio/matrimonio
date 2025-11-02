@@ -37,6 +37,11 @@ a:hover{text-decoration:underline}
   background:rgba(255,253,249,.8);
   border-bottom:1px solid #eadfcd;
 }
+/* più respiro ai lati su mobile + supporto notch */
+.site-header .container{
+  padding-left:calc(24px + env(safe-area-inset-left, 0));
+  padding-right:calc(24px + env(safe-area-inset-right, 0));
+}
 .nav-wrap{
   display:flex;align-items:center;justify-content:space-between;
   padding:12px 0;
@@ -56,9 +61,11 @@ a:hover{text-decoration:underline}
   display:block;width:24px;height:2px;background:var(--text);margin:5px 0;transition:.2s
 }
 
-/* ----- Hero ----- */
+/* ----- Sezioni base ----- */
 .section{padding:56px 0}
 .section.alt{background:var(--alt)}
+
+/* ----- Hero (desktop) ----- */
 .hero{padding:84px 0}
 .hero-grid{
   display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center
@@ -158,20 +165,72 @@ a:hover{text-decoration:underline}
 /* ----- Sezioni ancorate con header sticky ----- */
 .section{scroll-margin-top:90px}
 
-/* ----- Responsive ----- */
+/* ============================
+   Responsive / Mobile styles
+   ============================ */
 @media (max-width: 980px){
+  /* layout sezioni standard */
   .hero-grid{grid-template-columns:1fr;gap:24px}
   .cards.three{grid-template-columns:1fr}
   .grid-two{grid-template-columns:1fr}
   .map-frame iframe{height:360px}
+
+  /* ---- HERO come background con overlay ---- */
+  .hero{
+    position:relative;
+    padding:120px 0 100px; /* più spazio verticale per foto di sfondo */
+    color:#fff;
+    /* usa l'immagine già presente in assets */
+    background-image:url("assets/alessio-elena.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    /* velo per leggibilità del testo */
+    background:linear-gradient(180deg, rgba(0,0,0,.28), rgba(0,0,0,.45));
+  }
+  .hero .container,
+  .hero .hero-text{position:relative; z-index:1}
+  .hero .eyebrow,
+  .hero h1,
+  .hero .date{color:#fff}
+  .countdown div{
+    background:rgba(255,255,255,.9);
+    color:#1f1d18;
+  }
+  /* bottoni su sfondo scuro */
+  .btn-outline{color:#fff;border-color:#fff}
+  .btn-outline:hover{background:rgba(255,255,255,.15)}
+  /* nasconde l'immagine separata per evitare duplicati */
+  .hero-photo{display:none}
 }
 
+/* header & menu: margini dai bordi + notch-safe */
 @media (max-width: 840px){
   .site-nav{display:none}
   .nav-toggle{display:block}
   .site-nav.open{
-    display:flex;flex-direction:column;gap:14px;position:absolute;right:20px;top:60px;
+    display:flex;flex-direction:column;gap:14px;position:absolute;
+    right:24px;top:64px;
     background:var(--card);padding:12px 14px;border-radius:12px;box-shadow:var(--shadow)
   }
 }
 
+/* più margine laterale su schermi molto piccoli */
+@media (max-width: 520px){
+  .container{
+    padding-left:calc(22px + env(safe-area-inset-left, 0));
+    padding-right:calc(22px + env(safe-area-inset-right, 0));
+  }
+}
+
+/* ancora più respiro su telefoni stretti */
+@media (max-width: 380px){
+  .container{
+    padding-left:calc(26px + env(safe-area-inset-left, 0));
+    padding-right:calc(26px + env(safe-area-inset-right, 0));
+  }
+}

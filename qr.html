@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR — Elena & Alessio</title>
+  <base href="./" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    .qr-page{ min-height: 100svh; display:grid; place-items:center; padding: 24px 0; }
+    .qr-card{
+      width: min(820px, calc(100% - 46px));
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(34,34,34,.14);
+      border-radius: 22px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.10);
+      padding: 18px;
+      text-align:center;
+    }
+    .qr-title{ font-family:"Playfair Display",serif; font-size:2rem; margin: 6px 0 8px; }
+    .qr-sub{ color: rgba(34,34,34,.70); margin: 0 0 14px; }
+    .qr-input{
+      width: min(680px, 100%);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,34,34,.18);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .95rem;
+      margin: 10px auto 12px;
+    }
+    #qrcode{ display:grid; place-items:center; padding: 12px 0 2px; }
+    .qr-actions{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <div class="qr-page">
+    <div class="qr-card">
+      <div class="qr-title">QR Code</div>
+      <p class="qr-sub">Genera e scarica il QR da stampare sulle partecipazioni.</p>
+
+      <input class="qr-input" id="urlInput" />
+      <div class="qr-actions">
+        <button class="btn" id="regenBtn" type="button">Genera</button>
+        <button class="btn btn-ghost" id="downloadBtn" type="button">Scarica PNG</button>
+        <a class="btn btn-ghost" href="index.html">Torna al sito</a>
+      </div>
+
+      <div id="qrcode"></div>
+
+      <p class="small muted" style="margin-top:12px;">
+        Per un QR “stabile”, usa un URL definitivo (meglio un dominio vostro) e valorizza <code>siteUrl</code> in <code>config.js</code>.
+      </p>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    function inferSiteUrl() {
+      const cfg = window.SITE_CONFIG || {};
+      if (cfg.siteUrl && cfg.siteUrl.trim()) return cfg.siteUrl.trim();
+
+      // Use current directory root (works for GitHub Pages /repo/)
+      const u = new URL(window.location.href);
+      u.hash = ""; u.search = "";
+      u.pathname = u.pathname.replace(/\/[^\/]*$/, "/");
+      return u.toString();
+    }
+
+    const urlInput = document.getElementById("urlInput");
+    const qrEl = document.getElementById("qrcode");
+    const regenBtn = document.getElementById("regenBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    function render() {
+      const text = (urlInput.value || "").trim();
+      qrEl.innerHTML = "";
+      new QRCode(qrEl, { text, width: 420, height: 420, correctLevel: QRCode.CorrectLevel.H });
+    }
+
+    urlInput.value = inferSiteUrl();
+    render();
+    regenBtn.addEventListener("click", render);
+
+    downloadBtn.addEventListener("click", () => {
+      const img = qrEl.querySelector("img");
+      const canvas = qrEl.querySelector("canvas");
+      const dataUrl = img?.src || canvas?.toDataURL("image/png");
+      if (!dataUrl) return alert("Impossibile scaricare il QR. Riprova.");
+
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "qr-elena-alessio.png";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  </script>
+</body>
+</html>

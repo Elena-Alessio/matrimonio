@@ -1,211 +1,306 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#7b6c57" />
-  <title>Alessio &amp; Elena — Ci sposiamo!</title>
+  <title>Elena & Alessio — Matrimonio</title>
+  <meta name="theme-color" content="#f3f2ed" />
+  <base href="./" />
 
-  <!-- Font eleganti e moderni -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Cloudinary Upload Widget (per la sezione "Carica le foto") -->
-  <script src="https://widget.cloudinary.com/v2.0/global/all.js" defer></script>
-  <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="site-header">
-    <div class="container nav-wrap">
-      <a class="brand" href="#hero" aria-label="Torna all'inizio">
-        <span class="brand-line1">Alessio</span>
-        <span class="amp">&amp;</span>
-        <span class="brand-line2">Elena</span>
-      </a>
+  <!-- Desktop left sidebar -->
+  <aside class="sidebar" aria-label="Menu">
+    <nav class="sidebar-nav">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#benvenuti" class="nav-link">Benvenuti</a>
+      <a href="#logistica" class="nav-link">Logistica</a>
+      <a href="#mappa" class="nav-link">Mappa</a>
+      <a href="#foto" class="nav-link">Foto</a>
+      <a href="#regalo" class="nav-link">Lista nozze</a>
+      <a href="#rsvp" class="nav-link">Conferma presenza</a>
+    </nav>
+  </aside>
 
-      <button class="nav-toggle" aria-label="Apri menù" aria-expanded="false">
+  <!-- Mobile top bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-title" id="topbarTitle">Elena & Alessio</div>
+      <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
+    </div>
 
-      <nav class="site-nav" aria-label="Navigazione principale">
-        <a href="#info">Il Giorno</a>
-        <a href="#logistica">Logistica</a>
-        <a href="#mappa">Mappa</a>
-        <a href="#foto">Foto</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-panel">
+        <div class="drawer-head">
+          <div class="drawer-brand">Elena &amp; Alessio</div>
+          <button class="drawer-close" id="drawerClose" aria-label="Chiudi menu">✕</button>
+        </div>
+        <nav class="drawer-nav">
+          <a href="#home" class="drawer-link">Home</a>
+          <a href="#benvenuti" class="drawer-link">Benvenuti</a>
+          <a href="#logistica" class="drawer-link">Logistica</a>
+          <a href="#mappa" class="drawer-link">Mappa</a>
+          <a href="#foto" class="drawer-link">Foto</a>
+          <a href="#regalo" class="drawer-link">Lista nozze</a>
+          <a href="#rsvp" class="drawer-link">Conferma presenza</a>
+        </nav>
+      </div>
+      <div class="mobile-drawer-backdrop" id="drawerBackdrop"></div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero section">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <p class="eyebrow">Ci sposiamo!</p>
-        <h1>Alessio &amp; Elena</h1>
-        <!-- Imposta la data nel file script.js (WEDDING_DATE) -->
-        <p class="date" id="dateLabel">Data da annunciare</p>
+  <main class="content">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
 
-        <div class="countdown" id="countdown" aria-live="polite">
-          <div><span id="dd">–</span><small>giorni</small></div>
-          <div><span id="hh">–</span><small>ore</small></div>
-          <div><span id="mm">–</span><small>min</small></div>
-          <div><span id="ss">–</span><small>sec</small></div>
-        </div>
+      <div class="hero-center">
+        <div class="hero-title" id="heroTitle">ELENA E ALESSIO</div>
+        <div class="hero-sub" id="heroSub">si sposano!</div>
+        <div class="hero-date" id="heroDate">30 MAGGIO 2026 • ORE 11:00</div>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="#info">Dettagli</a>
-          <a class="btn btn-outline" href="#foto">Carica le foto</a>
+        <div class="countdown" aria-label="Countdown">
+          <div class="cd-box"><div class="cd-num" id="cdDays">—</div><div class="cd-lbl">giorni</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdHours">—</div><div class="cd-lbl">ore</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdMins">—</div><div class="cd-lbl">min</div></div>
+          <div class="cd-box"><div class="cd-num" id="cdSecs">—</div><div class="cd-lbl">sec</div></div>
         </div>
       </div>
 
-      <figure class="hero-photo">
-        <!-- Sostituisci con la foto verticale della coppia -->
-        <img src="assets/alessio-elena.jpg" alt="Ritratto di Alessio ed Elena" loading="eager">
-        <figcaption class="visually-hidden">Alessio &amp; Elena</figcaption>
-      </figure>
-    </div>
-  </section>
+      <a class="scroll-down" href="#benvenuti" aria-label="Scorri alla sezione successiva">↓</a>
+    </section>
 
-  <!-- IL GIORNO / PROGRAMMA -->
-  <section id="info" class="section">
-    <div class="container">
-      <h2>Il Giorno</h2>
-      <div class="cards three">
-        <article class="card">
-          <h3>Cerimonia</h3>
-          <p><strong>Ore 11:00</strong> — Arrivo e ingresso in chiesa.</p>
-          <p>Si consiglia di arrivare con anticipo.</p>
-        </article>
-        <article class="card">
-          <h3>Ricevimento</h3>
-          <p><strong>Ore XX:XX</strong> — Aperitivo e cena.<br/>[Location Placeholder]</p>
-        </article>
-        <article class="card">
-          <h3>[Placeholder]</h3>
-          <p>[Placeholder]</p>
-        </article>
+    <!-- BENVENUTI (with blossoms) -->
+    <section id="benvenuti" class="section blossom-decor">
+      <div class="wrap">
+        <h2 class="section-title">Benvenuti</h2>
+        <p class="intro-text">
+          Benvenuti nel sito del nostro matrimonio!<br><br>
+          Un piccolo spazio dove raccontiamo il nostro grande giorno e dove inizia ufficialmente il conto alla rovescia!!<br><br>
+          Non vediamo l’ora di festeggiare insieme a voi! 🩷
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- LOGISTICA / COORDINATE / LINK -->
-  <section id="logistica" class="section alt">
-    <div class="container">
-      <h2>Logistica</h2>
+    <!-- LOGISTICA -->
+    <section id="logistica" class="section alt">
+      <div class="wrap">
+        <h2 class="section-title">Logistica</h2>
 
-      <div class="grid-two">
-        <div>
-          <h3>La Chiesa</h3>
-          <p>
-            La chiesa si trova in campagna, in una zona isolata. Strade strette in alcuni tratti:
-            <strong>partite con anticipo</strong> e valutate il parcheggio lungo la strada principale.
-          </p>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">La chiesa</h3>
+            <p class="card-text" id="churchLabel">
+              Chiesa della Madonna del Soccorso, Corchiano (VT)
+            </p>
+            <a class="btn" id="churchLink" href="#" target="_blank" rel="noopener">
+              Apri su Google Maps
+            </a>
+          </article>
 
-          <!-- Aggiorna nome se vuoi specificarlo -->
-          <p class="location-name">Chiesa (campagna Viterbo/Terni)</p>
+          <article class="card">
+            <h3 class="card-title">Il ricevimento</h3>
+            <p class="card-text">
+              <span class="mono" id="receptionHuman">42°20'13.9"N 12°24'11.6"E</span><br>
+              <span class="mono muted" id="receptionDec">42.337194,12.403222</span>
+            </p>
+            <div class="row">
+              <button class="btn btn-ghost" id="copyCoords" type="button">Copia coordinate</button>
+              <a class="btn" id="receptionLink" href="#" target="_blank" rel="noopener">
+                Apri su Google Maps
+              </a>
+            </div>
+            <div class="toast" id="coordsToast" role="status" aria-live="polite">Copiato ✅</div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-          <ul class="details">
-            <li><strong>Coordinate:</strong> <code id="coords">42°20'13.9"N 12°24'11.6"E</code></li>
-            <li><strong>Link:</strong>
-              <a id="gmapsLink" href="https://maps.google.com/?q=42.337194,12.403222" target="_blank" rel="noopener">Apri in Google Maps</a>
-              ·
-              <a id="appleLink" href="maps://?ll=42.337194,12.403222" target="_blank" rel="noopener">Apri in Apple&nbsp;Maps</a>
-            </li>
-            <li><button class="btn btn-soft" id="copyCoords" type="button">Copia coordinate</button></li>
-          </ul>
+    <!-- MAPPA (keep this — she likes it) -->
+    <section id="mappa" class="section">
+      <div class="wrap">
+        <h2 class="section-title">Mappa</h2>
+        <p class="intro-text muted" style="max-width:860px;">
+          Qui trovi la mappa (puoi anche aprire direttamente i link su Google Maps).
+        </p>
 
-          <div class="tips">
-            <h4>Consigli utili</h4>
-            <ul>
-              <li>Campo cellulare non sempre presente.</li>
-              <li>Portate una bottiglietta d'acqua, in estate fa caldo.</li>
-              <li>In caso di pioggia: ombrello e scarpe adatte a sterrato.</li>
-            </ul>
+        <div class="grid" style="margin-top:24px;">
+          <article class="card">
+            <h3 class="card-title">Mappa — Chiesa</h3>
+            <div class="map-frame">
+              <iframe
+                id="churchMapIframe"
+                title="Mappa Chiesa"
+                src=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Mappa — Ricevimento</h3>
+            <div class="map-frame">
+              <iframe
+                id="receptionMapIframe"
+                title="Mappa Ricevimento"
+                src=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOTO / UPLOAD -->
+    <section id="foto" class="section alt">
+      <div class="wrap">
+        <h2 class="section-title">Foto</h2>
+        <p class="intro-text muted" style="max-width:780px;">
+          Qui puoi caricare le foto <strong>del nostro matrimonio</strong>. Grazie! 🤍
+        </p>
+
+        <div class="grid" style="margin-top:24px;">
+          <article class="card">
+            <h3 class="card-title">Carica le foto</h3>
+            <p class="card-text muted">
+              Premi il pulsante e seleziona le foto. Funziona anche da telefono.
+            </p>
+            <button class="btn" id="uploadBtn" type="button">Carica foto</button>
+            <div class="small muted" id="uploadStatus" style="margin-top:10px;"></div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Anteprima</h3>
+            <div class="gallery" id="gallery"></div>
+            <p class="small muted" style="margin-top:10px;">
+              Nota: l’anteprima mostra le foto caricate in questa sessione.
+              Tutte le foto restano nel vostro Cloudinary.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIFT (second-to-last section) -->
+    <section id="regalo" class="section">
+      <div class="wrap">
+        <h2 class="section-title">Lista nozze</h2>
+        <p class="intro-text muted" style="max-width:780px;">
+          La vostra presenza è il regalo più bello. Se desiderate contribuire, qui trovate l’IBAN.
+        </p>
+
+        <div class="card card-wide" style="margin-top:24px;">
+          <h3 class="card-title">IBAN</h3>
+          <p class="mono big" id="ibanText">IT00 X000 0000 0000 0000 0000 000</p>
+          <div class="row">
+            <button class="btn" id="copyIban" type="button">Copia IBAN</button>
           </div>
-        </div>
-
-        <div>
-          <h3>Percorsi suggeriti</h3>
-          <p>Usate direttamente il link a Maps qui sopra. Per chi preferisce i navigatori:</p>
-          <ul>
-            <li><strong>Waze:</strong> cercate “42.337194, 12.403222”.</li>
-            <li><strong>TomTom/Garmin:</strong> inserite le coordinate in formato decimale.</li>
-          </ul>
+          <div class="toast" id="ibanToast" role="status" aria-live="polite">Copiato ✅</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- MAPPA EMBED -->
-  <section id="mappa" class="section">
-    <div class="container">
-      <h2>Mappa</h2>
-      <!-- Embed semplice basato su coordinate decimali -->
-      <div class="map-frame">
-        <iframe
-          title="Mappa — Chiesa"
-          src="https://www.google.com/maps?q=42.337194,12.403222&z=14&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen>
-        </iframe>
+    <!-- RSVP (last section) -->
+    <section id="rsvp" class="section alt blossom-decor blossom-decor-bottom">
+      <div class="wrap">
+        <h2 class="section-title">Conferma presenza</h2>
+        <p class="intro-text muted" style="max-width:780px;">
+          Compila questo form per farci sapere se ci sarai (e in quanti). Grazie! 🩷
+        </p>
+
+        <!-- Custom form (works with Formspree OR can be replaced with Google Form embed) -->
+        <div class="card card-wide" style="margin-top:24px;">
+          <h3 class="card-title">RSVP</h3>
+
+          <!-- Optional Google Form embed (JS will show/hide depending on config) -->
+          <div id="googleFormWrap" style="display:none;">
+            <div class="map-frame">
+              <iframe
+                id="googleFormIframe"
+                title="RSVP Google Form"
+                src=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <p class="small muted" style="margin-top:10px;">
+              Se non vedi il form, aprilo direttamente dal link in alto.
+            </p>
+          </div>
+
+          <!-- Custom form -->
+          <form id="rsvpForm" class="form">
+            <div class="form-row">
+              <label class="label" for="name">Nome e cognome</label>
+              <input class="input" id="name" name="nome" type="text" autocomplete="name" required />
+            </div>
+
+            <div class="form-row">
+              <label class="label" for="attending">Ci sarai?</label>
+              <select class="input" id="attending" name="presenza" required>
+                <option value="" selected disabled>Seleziona…</option>
+                <option value="Sì">Sì, ci sarò</option>
+                <option value="No">No, non riesco</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label class="label" for="guests">Numero di persone</label>
+              <input class="input" id="guests" name="numero_persone" type="number" min="1" max="10" value="1" required />
+              <div class="hint muted small">Includi anche te. (Es: se siete in 2, metti 2)</div>
+            </div>
+
+            <div class="form-row">
+              <label class="label" for="diet">Allergie / esigenze alimentari</label>
+              <input class="input" id="diet" name="esigenze_alimentari" type="text" placeholder="Es: vegetariano, glutine, ecc." />
+            </div>
+
+            <div class="form-row">
+              <label class="label" for="note">Messaggio (opzionale)</label>
+              <textarea class="input textarea" id="note" name="messaggio" rows="4" placeholder="Scrivi qui…"></textarea>
+            </div>
+
+            <!-- Helpful hidden metadata -->
+            <input type="hidden" name="pagina" value="RSVP Elena & Alessio" />
+
+            <div class="row" style="margin-top:14px;">
+              <button class="btn" id="rsvpSubmit" type="submit">Invia</button>
+              <div class="small muted" id="rsvpStatus"></div>
+            </div>
+          </form>
+        </div>
+
+        <p class="small muted" style="margin-top:16px;">
+          QR per le partecipazioni: apri <a href="qr.html">qr.html</a> e scarica il PNG (usa l’URL stabile del sito).
+        </p>
       </div>
-      <p class="map-note">Se la mappa non si carica, usate il link a Google Maps nella sezione Logistica.</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOTO / UPLOAD -->
-  <section id="foto" class="section alt">
-    <div class="container">
-      <h2>Carica le tue foto</h2>
-      <p class="muted">
-        Condividi i momenti più belli del matrimonio di Alessio &amp; Elena.
-        Le immagini vengono caricate in uno spazio privato. Formati accettati: JPG/PNG/HEIC/WEBP. Max 15 MB per file.
-      </p>
-
-      <div class="upload-box">
-        <button class="btn btn-primary" id="uploadBtn" type="button">Carica foto</button>
-        <div id="uploadStatus" class="status" role="status" aria-live="polite"></div>
+    <footer class="footer">
+      <div class="wrap footer-inner">
+        <div>© <span id="year"></span> Elena &amp; Alessio</div>
+        <a href="#home" class="muted">Torna su</a>
       </div>
+    </footer>
+  </main>
 
-      <!-- Galleria (opzionale: inserisci manualmente alcune foto o thumbnail da Cloudinary) -->
-      <div class="gallery" id="gallery">
-        <!-- Esempio (sostituisci src con URL Cloudinary trasformati, es: .../image/upload/w_900,f_auto,q_auto/... ) -->
-        <!-- <img src="https://res.cloudinary.com/TUO_CLOUD/image/upload/w_600,f_auto,q_auto/v123/wedding-photos/xxx.jpg" alt="Ricordo"> -->
-      </div>
-    </div>
-  </section>
+  <!-- Cloudinary widget -->
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2>Domande frequenti</h2>
-      <div class="faq">
-        <details>
-          <summary>[Domanda 1]</summary>
-          <p>[Risposta 1]</p>
-        </details>
-        <details>
-          <summary>[Domanda 2]</summary>
-          <p>[Risposta 2]</p>
-        </details>
-        <details>
-          <summary>Foto e video</summary>
-          <p>Scattate pure! Condividetele tramite il pulsante “Carica foto”.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="container">
-      <p>Con amore, <strong>Alessio &amp; Elena</strong></p>
-      <p class="tiny">© <span id="year"></span> — Tutti i diritti riservati</p>
-      <a class="to-top" href="#hero" aria-label="Torna su">↑ Torna su</a>
-    </div>
-  </footer>
+  <script src="config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-

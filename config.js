@@ -8,13 +8,13 @@ window.SITE_CONFIG = {
 
   church: {
     label: "Chiesa della Madonna del Soccorso, Corchiano (VT)",
-    mapsUrl: "https://maps.app.goo.gl/k1NE3w4CULaDtjQeA",
+    mapsUrl: "https://maps.app.goo.gl/d1SEpdUdZBEGQ1qV8",
   },
 
   reception: {
     coordsHuman: `42°20'13.9"N 12°24'11.6"E`,
     coordsDecimal: "42.337194,12.403222",
-    mapsUrl: "https://goo.gl/maps/iZVnAFKjcZA7o4e9",
+    mapsUrl: "https://maps.app.goo.gl/ALnhR7Hy39ijm17J8",
   },
 
   slideshowImages: [

@@ -31,32 +31,18 @@
   </aside>
 
   <!-- Mobile top bar -->
-  <header class="topbar">
-    <div class="topbar-inner">
-      <div class="topbar-title" id="topbarTitle">Elena & Alessio</div>
-      <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
-      <div class="mobile-drawer-panel">
-        <div class="drawer-head">
-          <div class="drawer-brand">Elena &amp; Alessio</div>
-          <button class="drawer-close" id="drawerClose" aria-label="Chiudi menu">✕</button>
-        </div>
-        <nav class="drawer-nav">
-          <a href="#home" class="drawer-link">Home</a>
-          <a href="#benvenuti" class="drawer-link">Benvenuti</a>
-          <a href="#logistica" class="drawer-link">Logistica</a>
-          <a href="#mappa" class="drawer-link">Mappa</a>
-          <a href="#foto" class="drawer-link">Foto</a>
-          <a href="#regalo" class="drawer-link">Lista nozze</a>
-          <a href="#rsvp" class="drawer-link">Conferma presenza</a>
-        </nav>
-      </div>
-      <div class="mobile-drawer-backdrop" id="drawerBackdrop"></div>
-    </div>
+  <div class="topbar-inner">
+    <div class="topbar-title" id="topbarTitle">Elena & Alessio</div>
+    
+    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <line x1="4" y1="6" x2="20" y2="6" />
+        <line x1="4" y1="12" x2="20" y2="12" />
+        <line x1="4" y1="18" x2="20" y2="18" />
+      </svg>
+    </button>
+  </div>
   </header>
 
   <main class="content">
@@ -297,7 +283,46 @@ il vostro regalo:        </p>
       </div>
     </footer>
   </main>
+      <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+      <div class="mobile-drawer-panel">
+        <div class="drawer-head">
+          <div class="drawer-brand">Elena &amp; Alessio</div>
+          <button class="drawer-close" id="drawerClose" aria-label="Chiudi menu">✕</button>
+        </div>
+        <nav class="drawer-nav">
+          <a href="#home" class="drawer-link">Home</a>
+          <a href="#benvenuti" class="drawer-link">Benvenuti</a>
+          <a href="#logistica" class="drawer-link">Logistica</a>
+          <a href="#mappa" class="drawer-link">Mappa</a>
+          <a href="#foto" class="drawer-link">Foto</a>
+          <a href="#regalo" class="drawer-link">Lista nozze</a>
+          <a href="#rsvp" class="drawer-link">Conferma presenza</a>
+        </nav>
+      </div>
+      <div class="mobile-drawer-backdrop" id="drawerBackdrop"></div>
+    </div>
+<footer class="footer">
+    </footer>
+</main> <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+  <div class="mobile-drawer-backdrop" id="drawerBackdrop"></div>
+  <div class="mobile-drawer-panel">
+    <div class="drawer-head">
+      <div class="drawer-brand">Elena &amp; Alessio</div>
+      <button class="drawer-close" id="drawerClose" aria-label="Chiudi menu">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="#home" class="drawer-link">Home</a>
+      <a href="#benvenuti" class="drawer-link">Benvenuti</a>
+      <a href="#logistica" class="drawer-link">Logistica</a>
+      <a href="#mappa" class="drawer-link">Mappa</a>
+      <a href="#foto" class="drawer-link">Foto</a>
+      <a href="#regalo" class="drawer-link">Lista nozze</a>
+      <a href="#rsvp" class="drawer-link">Conferma presenza</a>
+    </nav>
+  </div>
+</div>
 
+<script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
   <!-- Cloudinary widget -->
   <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 

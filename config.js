@@ -4,7 +4,7 @@ window.SITE_CONFIG = {
   weddingDateISO: "2026-05-30T11:00:00+02:00",
   weddingDateDisplay: "30 MAGGIO 2026 • ORE 11:00",
 
-  heroSubtitle: "si sposano!",
+  heroSubtitle: "Ci Sposiamo!",
 
   church: {
     label: "Chiesa della Madonna del Soccorso, Corchiano (VT)",

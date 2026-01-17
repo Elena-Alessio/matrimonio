@@ -7,6 +7,9 @@
   <meta name="theme-color" content="#f3f2ed" />
   <base href="./" />
 
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -60,6 +63,7 @@
     <!-- HERO -->
     <section id="home" class="hero">
       <div class="hero-slides" id="heroSlides" aria-hidden="true"></div>
+      <div class="hero-collage" id="heroCollage" aria-hidden="true"></div>
       <div class="hero-overlay" aria-hidden="true"></div>
 
       <div class="hero-center">
@@ -84,7 +88,7 @@
         <h2 class="section-title">Benvenuti</h2>
         <p class="intro-text">
           Benvenuti nel sito del nostro matrimonio!<br><br>
-          Un piccolo spazio dove raccontiamo il nostro grande giorno e dove inizia ufficialmente il conto alla rovescia!!<br><br>
+          Un piccolo spazio dove raccontiamo il nostro grande giorno e dove inizia ufficialmente il conto alla rovescia!<br><br>
           Non vediamo l’ora di festeggiare insieme a voi! 🩷
         </p>
       </div>
@@ -199,12 +203,13 @@
       <div class="wrap">
         <h2 class="section-title">Lista nozze</h2>
         <p class="intro-text muted" style="max-width:780px;">
-          La vostra presenza è il regalo più bello. Se desiderate contribuire, qui trovate l’IBAN.
-        </p>
+La vostra presenza sarà per noi il dono più bello.<br>
+Se desiderate contribuire al nostro futuro con un pensiero speciale, saremo felici di accogliere
+il vostro regalo:        </p>
 
         <div class="card card-wide" style="margin-top:24px;">
           <h3 class="card-title">IBAN</h3>
-          <p class="mono big" id="ibanText">IT00 X000 0000 0000 0000 0000 000</p>
+          <p class="mono big" id="ibanText">IT07V0503403265000000019169</p>
           <div class="row">
             <button class="btn" id="copyIban" type="button">Copia IBAN</button>
           </div>
@@ -282,10 +287,6 @@
             </div>
           </form>
         </div>
-
-        <p class="small muted" style="margin-top:16px;">
-          QR per le partecipazioni: apri <a href="qr.html">qr.html</a> e scarica il PNG (usa l’URL stabile del sito).
-        </p>
       </div>
     </section>
 

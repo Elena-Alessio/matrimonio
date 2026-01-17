@@ -95,39 +95,141 @@
   tick();
   setInterval(tick, 1000);
 
-  // ===== Slideshow =====
+  // ===== Hero media =====
+  // Mobile: slideshow. Desktop: collage built dynamically from the same images.
   const slidesWrap = $("#heroSlides");
+  const collageWrap = $("#heroCollage");
   const imgs = (cfg.slideshowImages || []).filter(Boolean);
+
+  const mqMobile = window.matchMedia("(max-width: 980px)");
+  let slideTimer = null;
+
+  const placeholderBg =
+    "linear-gradient(135deg, rgba(255,255,255,.12), rgba(0,0,0,.35)), radial-gradient(circle at 30% 20%, rgba(255,255,255,.14), transparent 60%)";
+
+  function clearEl(el) {
+    if (!el) return;
+    el.innerHTML = "";
+  }
 
   function addSlide(src, active) {
     const d = document.createElement("div");
     d.className = "hero-slide" + (active ? " active" : "");
-    d.style.backgroundImage = `url("${src}")`;
+    d.style.backgroundImage = src ? `url("${src}")` : placeholderBg;
     slidesWrap.appendChild(d);
   }
 
-  if (slidesWrap) {
+  function buildSlideshow() {
+    if (!slidesWrap) return null;
+    clearEl(slidesWrap);
+
+    if (imgs.length === 0) {
+      addSlide("", true);
+      return null;
+    }
+
+    imgs.forEach((src, i) => addSlide(src, i === 0));
+    const slides = Array.from(slidesWrap.querySelectorAll(".hero-slide"));
+
+    if (slides.length <= 1) return null;
+
+    let idx = 0;
+    return window.setInterval(() => {
+      slides[idx].classList.remove("active");
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add("active");
+    }, 6500);
+  }
+
+  function setRect(el, colStart, colSpan, rowStart, rowSpan) {
+    el.style.gridColumn = `${colStart} / span ${colSpan}`;
+    el.style.gridRow = `${rowStart} / span ${rowSpan}`;
+  }
+
+  function buildCollage() {
+    if (!collageWrap) return;
+    clearEl(collageWrap);
+
     if (imgs.length === 0) {
       const d = document.createElement("div");
-      d.className = "hero-slide active";
-      d.style.backgroundImage =
-        "linear-gradient(135deg, rgba(255,255,255,.12), rgba(0,0,0,.35)), radial-gradient(circle at 30% 20%, rgba(255,255,255,.14), transparent 60%)";
-      slidesWrap.appendChild(d);
-    } else {
-      imgs.forEach((src, i) => addSlide(src, i === 0));
-      const slides = Array.from(slidesWrap.querySelectorAll(".hero-slide"));
-      if (slides.length > 1) {
-        let idx = 0;
-        setInterval(() => {
-          slides[idx].classList.remove("active");
-          idx = (idx + 1) % slides.length;
-          slides[idx].classList.add("active");
-        }, 6500);
+      d.className = "hero-collage-item";
+      d.style.backgroundImage = placeholderBg;
+      setRect(d, 1, 12, 1, 12);
+      collageWrap.appendChild(d);
+      return;
+    }
+
+    const n = Math.min(imgs.length, 9);
+
+    for (let i = 0; i < n; i++) {
+      const src = imgs[i];
+      const d = document.createElement("div");
+      d.className = "hero-collage-item";
+      d.style.backgroundImage = `url("${src}")`;
+
+      // Layout presets (12x12 grid). Good for vertical photos.
+      if (n === 1) {
+        setRect(d, 1, 12, 1, 12);
+      } else if (n === 2) {
+        setRect(d, i === 0 ? 1 : 7, 6, 1, 12);
+      } else if (n === 3) {
+        if (i === 0) setRect(d, 1, 6, 1, 12);
+        if (i === 1) setRect(d, 7, 6, 1, 6);
+        if (i === 2) setRect(d, 7, 6, 7, 6);
+      } else if (n === 4) {
+        // 2x2
+        const col = (i % 2 === 0) ? 1 : 7;
+        const row = (i < 2) ? 1 : 7;
+        setRect(d, col, 6, row, 6);
+      } else if (n === 5) {
+        // Big center + 4 corners
+        if (i === 0) setRect(d, 4, 6, 1, 12);
+        if (i === 1) setRect(d, 1, 3, 1, 6);
+        if (i === 2) setRect(d, 1, 3, 7, 6);
+        if (i === 3) setRect(d, 10, 3, 1, 6);
+        if (i === 4) setRect(d, 10, 3, 7, 6);
+      } else if (n === 6) {
+        // 3 columns, 2 rows
+        const colStarts = [1, 5, 9];
+        const col = colStarts[i % 3];
+        const row = (i < 3) ? 1 : 7;
+        setRect(d, col, 4, row, 6);
+      } else {
+        // 7-9 images: 3x3 tiles
+        const colStarts = [1, 5, 9];
+        const rowStarts = [1, 5, 9];
+        const col = colStarts[i % 3];
+        const row = rowStarts[Math.floor(i / 3)];
+        setRect(d, col, 4, row, 4);
       }
+
+      collageWrap.appendChild(d);
     }
   }
 
-  // ===== Copy toasts =====
+  function renderHeroMedia() {
+    // Stop any previous slideshow timer
+    if (slideTimer) {
+      clearInterval(slideTimer);
+      slideTimer = null;
+    }
+
+    if (mqMobile.matches) {
+      // Mobile -> slideshow
+      if (collageWrap) clearEl(collageWrap);
+      slideTimer = buildSlideshow();
+    } else {
+      // Desktop -> collage
+      if (slidesWrap) clearEl(slidesWrap);
+      buildCollage();
+    }
+  }
+
+  renderHeroMedia();
+  if (mqMobile.addEventListener) mqMobile.addEventListener("change", renderHeroMedia);
+  else mqMobile.addListener(renderHeroMedia);
+
+// ===== Copy toasts =====
   const showToast = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -248,8 +350,11 @@
     if (googleIframe) googleIframe.src = rsvpCfg.googleEmbedUrl;
     if (rsvpForm) rsvpForm.style.display = "none";
   } else {
-    // Use custom form + Formspree endpoint
+    // Custom form submission:
+    // - provider: "formspree" (default) -> endpoint: https://formspree.io/f/XXXXXXX
+    // - provider: "google-sheets" -> endpoint: Apps Script Web App URL (writes to a Google Sheet)
     const endpoint = rsvpCfg.endpoint || "";
+    const isSheets = ["google-sheets", "googlesheets", "sheets"].includes(provider);
 
     rsvpForm?.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -263,6 +368,24 @@
 
       try {
         const fd = new FormData(rsvpForm);
+
+        if (isSheets) {
+          // Send as application/x-www-form-urlencoded (simple for Apps Script to parse).
+          fd.append("ua", navigator.userAgent);
+
+          const body = new URLSearchParams();
+          for (const [k, v] of fd.entries()) body.append(k, String(v));
+
+          // "no-cors" avoids CORS issues on static hosting. If the request doesn't throw, assume success.
+          await fetch(endpoint, { method: "POST", mode: "no-cors", body });
+
+          if (rsvpStatus) rsvpStatus.textContent = "Grazie! Risposta inviata ✅";
+          rsvpForm.reset();
+          setTimeout(() => { if (rsvpStatus) rsvpStatus.textContent = ""; }, 2500);
+          return;
+        }
+
+        // Default: Formspree (keeps the custom looking form)
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Accept": "application/json" },

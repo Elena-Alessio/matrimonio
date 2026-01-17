@@ -21,6 +21,8 @@ window.SITE_CONFIG = {
     "assets/slideshow/slide1.jpg",
     "assets/slideshow/slide2.jpg",
     "assets/slideshow/slide3.jpg",
+    "assets/slideshow/slide4.jpg",
+    "assets/slideshow/slide5.jpg"
   ],
 
   siteUrl: "https://elena-alessio.github.io/matrimonio/",
@@ -33,7 +35,12 @@ window.SITE_CONFIG = {
     maxFileSizeBytes: 15 * 1024 * 1024,
   },
 
-  iban: "IT00 X000 0000 0000 0000 0000 000",
+  iban: "IT07V0503403265000000019169",
+  
+  rsvp: {
+    provider: "google-sheets",
+    endpoint: "https://script.google.com/macros/s/AKfycbzch2A0KVjMakeZ20gNtsUTSdK8s8yyBvWqPgPTXrQbi6s8O8Tc4YFToVZ9mFqHoVY1/exec"
+  }
 
   /*
   RSVP OPTIONS:

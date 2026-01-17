@@ -369,6 +369,26 @@ a:hover{ text-decoration: underline; }
   gap: 18px;
   margin-top: 34px;
 }
+/* Update height here */
+.card-img {
+  width: calc(100% + 36px);
+  margin: -18px -18px 18px -18px;
+  height: 280px;  /* CHANGED: Increased from 220px to 280px */
+  object-fit: cover;
+  border-bottom: 1px solid rgba(34,34,34,.1);
+  display: block;
+}
+#logistica .card {
+  height: 100%;             /* Make cards fill the grid row height */
+  display: flex;            /* Turn on Flexbox */
+  flex-direction: column;   /* Stack items vertically */
+}
+
+/* This pushes the last button/row to the very bottom */
+#logistica .card > .btn:last-of-type,
+#logistica .card > .row:last-of-type {
+  margin-top: auto; 
+}
 .card{
   background: var(--card);
   border: 1px solid rgba(34,34,34,.14);

@@ -167,6 +167,7 @@ a:hover{ text-decoration: underline; }
   top: calc(10px + var(--safeT));
   left: calc(12px + var(--safeL));
   right: calc(12px + var(--safeR));
+  z-index: 2; 
   background: rgba(255,255,255,.90);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(34,34,34,.14);
